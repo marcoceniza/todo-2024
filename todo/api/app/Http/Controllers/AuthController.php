@@ -35,14 +35,15 @@ class AuthController extends Controller
             $token = $user->createToken($user->name)->plainTextToken;
     
             return response()->json([
+                'success' => true,
                 'message' => 'Login successfully!',
-                'token' => $token,
-                'user' => $user,
+                'token' => $token
             ]);
         } else {
             return response()->json([
+                'success' => false,
                 'message' => 'Invalid credentials.'
-            ], 401);
+            ]);
         }
     }
 

@@ -1,15 +1,19 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 export const useAuthStore = defineStore('auth', () => {
     const router = useRouter();
     const user = ref({});
+    const msg = reactive({
+        success: '',
+        error: ''
+    });
     const errors = ref({});
     const isLoading = ref(false);
     const token = ref(localStorage.getItem('token') || null);
-  
+
     const authenticate = async (apiRoute, formData) => {
         try {
             isLoading.value = true;
@@ -23,10 +27,13 @@ export const useAuthStore = defineStore('auth', () => {
                 router.push('/login');
             }
             
+            if(res.data.success) msg.success = res.data.message;
+            else msg.error = res.data.message
+
             isLoading.value = false;
         } catch (e) {
             isLoading.value = false;
-            errors.value = e.response.data.errors;
+            errors.value = e.response.data.errors
         }
     };
 
@@ -43,9 +50,15 @@ export const useAuthStore = defineStore('auth', () => {
             isLoading.value = false;
         } catch (e) {
             isLoading.value = false;
-            console.error('Logout failed:', e.response.data);
+            console.log('Logout failed:', e.response.data.errors);
         }
     };
 
-    return { authenticate, errors, user, isLoading, logout, token };
+    return {
+        // functions
+        authenticate, logout, 
+
+        // variables
+        token, user, isLoading, errors, msg
+    };
 });
