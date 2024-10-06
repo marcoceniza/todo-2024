@@ -25,6 +25,5 @@ import { storeToRefs } from 'pinia';
 
 const { token } = storeToRefs(useAuthStore());
 const { logout } = useAuthStore();
-
-const isAuthenticated = computed(() => token.value != null);
+const isAuthenticated = computed(() => !!token.value );
 </script>

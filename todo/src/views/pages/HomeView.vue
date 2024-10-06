@@ -3,7 +3,10 @@
         <div class="w-[500px] mx-auto">
             <div class="text-center flex justify-between items-center mt-5">
 
+                <div v-if="spinner" class="spinner-wrap"><p class="spinner"></p></div>
+
                 <p v-if="msg.success" class="success_msg">{{ msg.success }}</p>
+                <p v-else-if="msg.error" class="error_msg">{{ msg.error }}</p>
 
                 <h2 @click="filter = 'default'; currentPage = 1" class="cursor-pointer text-3xl font-bold text-[#1f5599]">Todo</h2>
                 <ul class="flex gap-2">
@@ -43,7 +46,7 @@ import { ChevronDoubleRightIcon, ChevronDoubleLeftIcon } from '@heroicons/vue/24
 import { useAuthStore } from '@/stores/authStore';
 
 const { filteredTodos, isLoading, filter, isStore, currentPage, totalPages } = storeToRefs(useTodoStore());
-const { msg } = storeToRefs(useAuthStore());
+const { msg, spinner } = storeToRefs(useAuthStore());
 const { fetchTodos, store, changePage } = useTodoStore()
 
 const formData = reactive({

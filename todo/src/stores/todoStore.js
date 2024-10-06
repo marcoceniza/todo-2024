@@ -15,7 +15,7 @@ export const useTodoStore = defineStore('todo', () => {
     const fetchTodos = async () => {
         try {
             isLoading.value = true;
-            const res = await axios.get('/api/todo', {
+            const res = await axios.get('/api-v1/api/todo', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -65,7 +65,7 @@ export const useTodoStore = defineStore('todo', () => {
     const store = async (formData) => {
         try {
             isStore.value = true;
-            const res = await axios.post('/api/todo', formData, {
+            const res = await axios.post('/api-v1/api/todo', formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -85,7 +85,7 @@ export const useTodoStore = defineStore('todo', () => {
     const status = async (apiRoute, id) => {
         try {
             isStore.value = true;
-            await axios.post(`/api/${apiRoute}/${id}`, {}, {
+            await axios.post(`/api-v1/api/${apiRoute}/${id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -102,7 +102,7 @@ export const useTodoStore = defineStore('todo', () => {
     const deleteTodo = async (id) => {
         try {
             isStore.value = true;
-            const res = await axios.delete(`/api/todo/${id}`, {
+            const res = await axios.delete(`/api-v1/api/todo/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -121,7 +121,7 @@ export const useTodoStore = defineStore('todo', () => {
     const retrieveTodo = async (id) => {
         try {
             isStore.value = true;
-            const res = await axios.put(`/api/retrieve/${id}`, {}, {
+            const res = await axios.put(`/api-v1/api/retrieve/${id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

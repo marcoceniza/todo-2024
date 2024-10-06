@@ -3,7 +3,8 @@
     <div class="w-[450px] max-w-full mx-auto bg-[#f2f2f2] mt-[50px] rounded-[4px] py-[12px] px-[20px]">
       <h2 class="text-center text-[25px] mb-[30px] mt-[10px]">Login Here</h2>
 
-      <p v-if="msg.error" class="error_msg">{{ msg.error }}</p>
+      <p v-if="msg.success" class="success_msg">{{ msg.success }}</p>
+      <p v-else-if="msg.error" class="error_msg">{{ msg.error }}</p>
 
       <form @submit.prevent="authenticate('login', formData); errors = {}">
         <section>
@@ -27,6 +28,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 import { storeToRefs } from 'pinia';
 import { onMounted, reactive } from 'vue';
 import { useAuthStore } from '../../stores/authStore';
@@ -37,8 +39,8 @@ const { authenticate } = useAuthStore();
 const formData = reactive({
   email: '',
   password: ''
-});
+})
 
-onMounted(() => { errors.value = {} });
+onMounted(() =>{ errors.value = {} });
 
 </script>

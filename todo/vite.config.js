@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/todo',
+  base: '/',
   plugins: [
     vue(),
   ],
@@ -16,8 +16,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': {
-        target: 'http://127.0.0.1:8000',
+      '/api-v1/api': {
+        target: 'https://todo.mc-dev.site',
         changeOrigin: true
       }
     }
