@@ -55,6 +55,8 @@ export const useAuthStore = defineStore('auth', () => {
                 localStorage.removeItem('token');
                 msg.error = res.data.message;
                 spinner.value = false;
+
+                setTimeout(() => { msg.error = '' }, 3000);
             }
 
             router.push('/login');

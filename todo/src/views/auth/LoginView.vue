@@ -1,10 +1,10 @@
 <template>
   <main class="container mx-auto">
-    <div class="w-[450px] max-w-full mx-auto bg-[#f2f2f2] mt-[50px] rounded-[4px] py-[12px] px-[20px]">
+    <p v-if="msg.success" class="success_msg">{{ msg.success }}</p>
+    <p v-else-if="msg.error" class="error_msg">{{ msg.error }}</p>
+    
+    <div class="w-[400px] max-w-full mx-auto bg-[#f2f2f2] rounded-[4px] py-[12px] px-[20px] absolute left-0 right-0 top-[50%] translate-y-[-50%]">
       <h2 class="text-center text-[25px] mb-[30px] mt-[10px]">Login Here</h2>
-
-      <p v-if="msg.success" class="success_msg">{{ msg.success }}</p>
-      <p v-else-if="msg.error" class="error_msg">{{ msg.error }}</p>
 
       <form @submit.prevent="authenticate('login', formData); errors = {}">
         <section>
